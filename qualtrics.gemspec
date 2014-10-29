@@ -22,4 +22,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake', '~> 10.0'
 
   spec.add_dependency 'nokogiri', '~> 1.6.3'
+  spec.add_dependency 'ruby-mcrypt', '~> 0.2.0'
 end

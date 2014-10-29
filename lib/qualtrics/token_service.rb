@@ -1,3 +1,5 @@
+require 'Base64'
+
 module Qualtrics
 
   class TokenService
@@ -40,6 +42,8 @@ module Qualtrics
       hash = OpenSSL::HMAC.digest(OpenSSL::Digest.new('md5'), @key, value)
       Base64.strict_encode64(hash)
     end
+
+    private
 
     def encrypt(value)
       require 'mcrypt'
