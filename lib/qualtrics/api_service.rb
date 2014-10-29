@@ -1,6 +1,10 @@
+require 'faraday'
+
 module Qualtrics
 
   class ApiService
+
+    attr_reader :last_response
 
     def initialize
       @conn = Faraday.new(url: 'https://survey.qualtrics.com') do |faraday|
@@ -19,24 +23,24 @@ module Qualtrics
     end
 
     def get_responses
-      response = @conn.get 'WRAPI/ControlPanel/api.php', @options
-      JSON.parse(response.body)
+      @last_response = @conn.get 'WRAPI/ControlPanel/api.php', @options
+      JSON.parse(@last_response.body)
     end
 
     # Get a single survey response from a response id
     def get_response(response_id)
-      @options[:ResponseID] = response_id
-      response = @conn.get 'WRAPI/ControlPanel/api.php', @options
-      res = JSON.parse(response.body)
+      ws_options = {ResponseID: response_id}
+      @last_response = @conn.get 'WRAPI/ControlPanel/api.php', @options.merge(ws_options)
+      res = JSON.parse(@last_response.body)
       raise 'Did not receive a valid response from Qualtrics' if res.empty?
 
       res[response_id]
     end
 
     def get_survey
-      @options[:Request] = 'getSurvey'
-      response = @conn.get 'WRAPI/ControlPanel/api.php', @options
-      response.body
+      ws_options = {Request: 'getSurvey'}
+      @last_response = @conn.get 'WRAPI/ControlPanel/api.php', @options.merge(ws_options)
+      @last_response.body
     end
 
     def add_recipient(first_name:, last_name:, email:)

@@ -1,0 +1,57 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://survey.qualtrics.com/WRAPI/ControlPanel/api.php?Format=JSON&Request=getLegacyResponseData&SurveyID=<QUALTRICS_SURVEY_ID>&Token=<QUALTRICS_API_TOKEN>&User=<QUALTRICS_USER_NAME>&Version=2.3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      Cache-Control:
+      - max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0,
+        max-age=315360000
+      Pragma:
+      - ''
+      Content-Transfer-Encoding:
+      - binary
+      Requeststatus:
+      - Success
+      Expires:
+      - Sat, 26 Oct 2024 20:20:11 GMT
+      P3p:
+      - CP="CAO DSP COR CURa ADMa DEVa OUR IND PHY ONL UNI COM NAV INT DEM PRE", CP="CAO
+        DSP COR CURa ADMa DEVa OUR IND PHY ONL UNI COM NAV INT DEM PRE"
+      Servershortname:
+      - w015
+      X-Cnection:
+      - close
+      Content-Length:
+      - '1081'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 29 Oct 2014 20:20:12 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"R_6Fr1NoQJZRqsfBP":{"ResponseSet":"Default Response Set","Name":"Anonymous","ExternalDataReference":"","EmailAddress":"","IPAddress":null,"Status":"1","StartDate":"2014-10-29
+        15:53:45","EndDate":"2014-10-29 15:54:49","Finished":"1","Q1":"Brutus","Q2":"Buckeye","Q3":"buckeye.1@osu.edu","Q4":1,"Q5_1":1,"Q5_2":3,"Q28":1,"Q29":2,"Q30":2,"Q31":2,"Q6":"test","Q7":"test","Q8":1,"Q9":2,"Q10":2,"Q11":2,"Q12":2,"Q13":2,"Q14":2,"Q15":2,"Q16":2,"Q17":2,"Q18":2,"Q19":1,"Q20":2,"Q21":"","Q22":2,"Q23":2,"Q24":2,"Q25":2,"Q26":"test","Q27":1},"R_0ILP6GWlqyJNXSZ":{"ResponseSet":"Default
+        Response Set","Name":"Anonymous","ExternalDataReference":"","EmailAddress":"","IPAddress":null,"Status":"1","StartDate":"2014-10-29
+        15:54:55","EndDate":"2014-10-29 15:56:09","Finished":"1","Q1":"testy","Q2":"testerson","Q3":"test.1000@osu.edu","Q4":4,"Q5_1":13,"Q5_2":16,"Q28":1,"Q29":2,"Q30":2,"Q31":3,"Q6":"test","Q7":"test","Q8":1,"Q9":2,"Q10":2,"Q11":2,"Q12":2,"Q13":2,"Q14":2,"Q15":2,"Q16":2,"Q17":2,"Q18":2,"Q19":2,"Q20":1,"Q21":"Psychology","Q22":2,"Q23":2,"Q24":2,"Q25":2,"Q26":"teset","Q27":1}}'
+    http_version: 
+  recorded_at: Wed, 29 Oct 2014 20:20:12 GMT
+recorded_with: VCR 2.9.3

@@ -23,4 +23,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'nokogiri', '~> 1.6.3'
   spec.add_dependency 'ruby-mcrypt', '~> 0.2.0'
+  spec.add_dependency 'faraday', '~> 0.9.0'
 end
