@@ -53,8 +53,8 @@ module Qualtrics
           Email: email
       }
 
-      response = @conn.get 'WRAPI/ControlPanel/api.php', @options.merge(ws_options)
-      res = JSON.parse(response.body)
+      @last_response = @conn.get 'WRAPI/ControlPanel/api.php', @options.merge(ws_options)
+      res = JSON.parse(@last_response.body)
 
       # return the recipient id or nil if it failed
       result = res['Result'].nil? ? nil : res['Result']['RecipientID']

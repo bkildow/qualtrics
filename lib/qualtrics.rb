@@ -2,8 +2,12 @@ require 'qualtrics/version'
 require 'qualtrics/token_service'
 require 'qualtrics/api_service'
 
-# require everything in the models directory
-#Dir[File.join(__dir__, 'qualtrics', 'models', '*.rb')].each {|file| require file }
+require 'qualtrics/models/question'
+require 'qualtrics/models/db_question'
+require 'qualtrics/models/mc_question'
+require 'qualtrics/models/te_question'
+require 'qualtrics/models/dd_question'
+require 'qualtrics/models/survey'
 
 module Qualtrics
 end

@@ -1,3 +1,5 @@
+require 'nokogiri'
+
 module Qualtrics
   class Question
     def initialize(question)

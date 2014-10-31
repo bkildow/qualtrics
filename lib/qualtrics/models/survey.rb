@@ -28,7 +28,7 @@ module Qualtrics
 
     def get_question_model(question_type, question)
       class_name = question_type + 'Question'
-      klass = class_name.constantize
+      klass = Qualtrics.const_get(class_name)
       klass.new(question)
     end
 

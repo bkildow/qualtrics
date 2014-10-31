@@ -1,4 +1,4 @@
-require 'qualtrics'
+require_relative '../lib/qualtrics'
 require 'factory_girl'
 require 'webmock/rspec'
 
