@@ -1,14 +1,16 @@
 # Multiple choice question type
 module Qualtrics
   class MCQuestion < Question
-    attr_reader :question_text, :question_description, :question_id, :choices
+    attr_reader :question_text, :question_description, :question_id, :choices, :selector
 
     def parse
-      @question_id = @xml_question.search('> ExportTag').first.content
+      @question_id          = @xml_question.search('> ExportTag').first.content
       @question_description = escape @xml_question.search('> QuestionDescription').first.content
-      @question_text = @xml_question.search('> QuestionText').first.content
-      @choices = {}
-      xml_choices = @xml_question.search('Choices > Choice')
+      @question_text        = @xml_question.search('> QuestionText').first.content
+      @selector             = @xml_question.search('> Selector').first.content
+
+      @choices              = {}
+      xml_choices           = @xml_question.search('Choices > Choice')
       xml_choices.each do |c|
         choice_id = c.attribute('ID').value
         choice_description = c.search('Description').first.content
@@ -21,20 +23,43 @@ module Qualtrics
     end
 
     def display_answer(response)
-      @choices.map do |k, v|
-        key = [@question_id, k].join('_')
-        v if response[key] === 1
-      end.compact.join(', ')
+      if @selector.in?['SL','SA','SB'] then
+        # Process single-line answer
+        @choices.each do |k, v|
+          if response[@question_id] == k
+            return v
+          end
+        end
+      else
+        @choices.map do |k, v|
+          key = [@question_id, k].join('_')
+          v if response[key] === 1
+        end.compact.join(', ')
+      end
     end
 
     def export_choices
-      @choices.values
+      if @selector.in?['SL','SA','SB'] then
+        # Return single-valued array
+        [@question_description]
+      else
+        @choices.values
+      end
     end
 
     def export_answers(response)
-      @choices.map do |k, v|
-        key = [@question_id, k].join('_')
-        response[key]
+      if @selector.in?['SL','SA','SB'] then
+        # Process single-line answer
+        @choices.each do |k, v|
+          if response[@question_id] == k
+            return v
+          end
+        end
+      else
+        @choices.map do |k, v|
+          key = [@question_id, k].join('_')
+          response[key]
+        end
       end
     end
 
