@@ -12,6 +12,6 @@ describe Qualtrics::Survey do
 
   it 'should extract multiple question objects' do
     survey = Qualtrics::Survey.new(@survey_xml)
-    expect(survey.questions.count).to eq(31)
+    expect(survey.questions.count).to eq(32)
   end
 end

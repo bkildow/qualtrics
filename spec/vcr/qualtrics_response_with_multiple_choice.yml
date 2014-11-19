@@ -1,0 +1,80 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://survey.qualtrics.com/WRAPI/ControlPanel/api.php?Format=JSON&Request=getLegacyResponseData&ResponseID=R_1HUQdzApaGnGoRL&SurveyID=<QUALTRICS_SURVEY_ID>&Token=<QUALTRICS_API_TOKEN>&User=<QUALTRICS_USER_NAME>&Version=2.3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache
+      Cache-Control:
+      - max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0,
+        max-age=315360000
+      Pragma:
+      - ''
+      Content-Transfer-Encoding:
+      - binary
+      Requeststatus:
+      - Success
+      Expires:
+      - Sat, 16 Nov 2024 21:04:00 GMT
+      P3p:
+      - CP="CAO DSP COR CURa ADMa DEVa OUR IND PHY ONL UNI COM NAV INT DEM PRE", CP="CAO
+        DSP COR CURa ADMa DEVa OUR IND PHY ONL UNI COM NAV INT DEM PRE"
+      Servershortname:
+      - w625
+      X-Cnection:
+      - close
+      X-Edgeconnect-Midmile-Rtt:
+      - '1'
+      - '16'
+      X-Edgeconnect-Origin-Mex-Latency:
+      - '541'
+      - '962'
+      Content-Length:
+      - '1981'
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 19 Nov 2014 21:04:01 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"R_1HUQdzApaGnGoRL":{"ResponseSet":"Default Response Set","Name":"Kildow,
+        Brian","ExternalDataReference":"","EmailAddress":"kildow.5@osu.edu","IPAddress":"128.146.29.180","Status":"0","StartDate":"2014-11-19
+        15:55:14","EndDate":"2014-11-19 15:56:33","Finished":"1","first_name":"Brian","last_name":"Kildow","email":"kildow.5@osu.edu","name_n":"kildow.5","emplid":"11111111","Q1":"Brian","Q2":"Kildow","Q3":"kildow.5@osu.edu","Q4":5,"Q5_1":1,"Q5_2":6,"Q28":1,"Q29":1,"Q30":2,"Q31":3,"Q32_1":"","Q32_2":1,"Q32_3":1,"Q6":"Sed
+        lectus. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus.
+        Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis.\r\n\r\nDonec
+        venenatis vulputate lorem. Pellentesque ut neque. Nunc nec neque.\r\n\r\nVivamus
+        laoreet. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi.
+        Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin
+        urna dolor sagittis lacus.","Q7":"Morbi ac felis. Fusce fermentum odio nec
+        arcu. Nullam accumsan lorem in dui.\r\n\r\nQuisque id odio. Curabitur suscipit
+        suscipit tellus. Nunc nec neque.\r\n\r\nClass aptent taciti sociosqu ad litora
+        torquent per conubia nostra, per inceptos hymenaeos. Etiam ultricies nisi
+        vel augue. Praesent ac sem eget est egestas volutpat.\r\n\r\nCras ultricies
+        mi eu turpis hendrerit fringilla. In enim justo, rhoncus ut, imperdiet a,
+        venenatis vitae, justo. In dui magna, posuere eget, vestibulum et, tempor
+        auctor, justo.","Q8":1,"Q9":2,"Q10":2,"Q11":1,"Q12":2,"Q13":2,"Q14":2,"Q15":1,"Q16":2,"Q17":2,"Q18":2,"Q19":1,"Q20":2,"Q21":"","Q22":2,"Q23":2,"Q24":2,"Q25":2,"Q26":"Aenean
+        tellus metus, bibendum sed, posuere ac, mattis non, nunc. Etiam iaculis nunc
+        ac metus. Duis lobortis massa imperdiet quam.\r\n\r\nPellentesque auctor neque
+        nec urna. Morbi mollis tellus ac sapien. Cras dapibus.\r\n\r\nDonec sodales
+        sagittis magna. Cras ultricies mi eu turpis hendrerit fringilla. Praesent
+        venenatis metus at tortor pulvinar varius.","Q27":1}}'
+    http_version: 
+  recorded_at: Wed, 19 Nov 2014 21:04:00 GMT
+recorded_with: VCR 2.9.3
