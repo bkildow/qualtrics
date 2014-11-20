@@ -23,32 +23,37 @@ module Qualtrics
     end
 
     def display_answer(response)
-      if %w(DL SA SB).include? @selector
-        # Process single-line answer
-        @choices[response[@question_id].to_s]
 
-      else
-        @choices.map do |k, v|
-          key = [@question_id, k].join('_')
-          v if response[key] === 1
-        end.compact.join(', ')
-      end
+      # Process single select answer
+      return @choices[response[@question_id].to_s] if is_single_value?
+
+      # Process multiple select
+      @choices.map do |k, v|
+        key = [@question_id, k].join('_')
+        v if response[key] === 1
+      end.compact.join(', ')
     end
 
     def export_choices
-      (%w(DL SA SB).include? @selector) ? [@question_description] : @choices.values
+      is_single_value? ? [@question_description] : @choices.values
     end
 
     def export_answers(response)
-      if  %w(DL SA SB).include? @selector
-        # Process single-line answer
-        [@choices[response[@question_id].to_s]]
-      else
-        @choices.map do |k, v|
-          key = [@question_id, k].join('_')
-          response[key]
-        end
+
+      # Process single select answer
+      return [@choices[response[@question_id].to_s]] if is_single_value?
+
+      # Process multi-select
+      @choices.map do |k, v|
+        key = [@question_id, k].join('_')
+        response[key]
       end
+    end
+
+    private
+
+    def is_single_value?
+      %w(DL SA SB).include? @selector
     end
 
   end

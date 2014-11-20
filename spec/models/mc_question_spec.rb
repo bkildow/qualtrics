@@ -15,42 +15,60 @@ describe Qualtrics::MCQuestion do
   end
 
   let (:survey) { Qualtrics::Survey.new(@survey_xml) }
-  let (:mc_question) { survey.questions.find { |q| q.instance_of? Qualtrics::MCQuestion } }
+  let (:single_mc_question) { survey.questions.find { |q| q.instance_of? Qualtrics::MCQuestion } }
+  let (:multiple_mc_question) do
+    survey.questions.find do |q|
+      (q.instance_of? Qualtrics::MCQuestion) && q.selector === 'MAVR'
+    end
+  end
 
-  describe 'selectors' do
-    it 'should get dl' do
-      expect(mc_question.selector).to eq('DL')
+  describe 'selector behavior' do
+    it 'should be DL for drop downs' do
+      expect(single_mc_question.selector).to eq('DL')
+    end
+
+    it 'should be MAVR for multi select' do
+      expect(multiple_mc_question.selector).to eq('MAVR')
+    end
+
+    it 'should contain certain values' do
+      selectors = survey.questions.map do |q|
+        q.selector if q.instance_of? Qualtrics::MCQuestion
+      end.compact.uniq
+
+      expect(selectors).to eq(%w(DL SAVR MAVR))
     end
   end
 
   describe '#display_answer' do
     it 'should display a single answer' do
-      expect(mc_question.display_answer(@response)).to eq('Biomedical Engineering')
+      expect(single_mc_question.display_answer(@response)).to eq('Biomedical Engineering')
+    end
+
+    it 'should display multiple answers separated by a comma' do
+      expect(multiple_mc_question.display_answer(@response)).to eq('Green, Blue')
     end
   end
 
   describe '#export_choices' do
     it 'should export single value array' do
-      expect(mc_question.export_choices).to eq(['Majors'])
+      expect(single_mc_question.export_choices).to eq(['Majors'])
+    end
+
+    it 'should export multi value array' do
+      expect(multiple_mc_question.export_choices).to eq(%w(Red Green Blue))
     end
   end
 
   describe '#export_answers' do
     it 'should export a single value answer' do
-      expect(mc_question.export_answers(@response)).to eq(['Biomedical Engineering'])
+      expect(single_mc_question.export_answers(@response)).to eq(['Biomedical Engineering'])
     end
-  end
 
-  describe 'Multiple choice instance' do
-    it 'should return an instance with multiple choice' do
-      mc_question = survey.questions.each do |q|
-        if q.instance_of? Qualtrics::MCQuestion
-          return q if q.selector == 'MA'
-        end
-      end
-
-      expect(mc_question).to eq('MA')
+    it 'should export a multi value answer' do
+      expect(multiple_mc_question.export_answers(@response)).to eq(['', 1, 1])
     end
+
   end
 
 end
