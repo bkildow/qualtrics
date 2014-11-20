@@ -16,6 +16,7 @@ module Qualtrics
         choice_description = c.search('Description').first.content
         @choices[choice_id] = escape choice_description
       end
+
     end
 
     def display_question
@@ -53,7 +54,7 @@ module Qualtrics
     private
 
     def is_single_value?
-      %w(DL SA SB).include? @selector
+      %w(DL SAHR SAVR SB).include? @selector
     end
 
   end
