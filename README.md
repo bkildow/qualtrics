@@ -85,3 +85,48 @@ for testing you can call the `get_test_url` method to make sure everything is wi
 ```ruby
 qts.get_test_url
 ```
+
+## Api usage
+
+`Qualtrics::ApiService` provides a few different wrappers methods to qualtrics web services. These include:
+
+* `#get_responses`
+* `#get_response(response_id)`
+* `#get_survey`
+* `#add_recipient(first_name:, last_name:, email:)`
+
+Example:
+
+```
+qs = Qualtrics::ApiService.new
+survey_definition = qs.get_survey
+```
+## Question and Response mapping
+
+`Qualtrics::Survey` will take a survey definition (as returned from `Qualtrics::ApiService#get_survey`) and
+create an array of question objects. There are multiple types of question objects depending on the types of questions
+asked in the survey (multiple choice, text entry, drill down, etc). All question types inherit from a `Question`
+base class and adhere to this interface. The methods provided are:
+
+* `#parse`, used to parse the survey definition to get at the question
+* `#display_question`, used to display the question text
+* `#display_answer(response)`, takes the entire response hash and parses out the answer for this question
+
+Example:
+
+```
+qs = Qualtrics::ApiService.new
+@response = qs.get_response(params[:response_id])
+@survey = Qualtrics::Survey.new(qs.get_survey)
+```
+
+then in the view:
+
+```
+<% @survey.questions.each do |q| %>
+  <tr>
+    <td><%= q.display_question %></td>
+    <td><%= q.display_answer(@response.response) %></td>
+  </tr>
+<% end %>
+```
