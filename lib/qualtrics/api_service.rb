@@ -27,6 +27,14 @@ module Qualtrics
       JSON.parse(@last_response.body)
     end
 
+    # returns an array of response_ids
+    def get_all_response_ids
+      # We don't want any questions, but I don't believe this is possible, so lets limit to one.
+      ws_options = {Questions: 'Q1'}
+      @last_response = @conn.get 'WRAPI/ControlPanel/api.php', @options.merge(ws_options)
+      JSON.parse(@last_response.body).keys
+    end
+
     # Get a single survey response from a response id
     def get_response(response_id)
       ws_options = {ResponseID: response_id}

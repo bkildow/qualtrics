@@ -54,4 +54,14 @@ describe Qualtrics::ApiService do
     end
   end
 
+  # TODO: Create dummy data to make this pass
+  # describe '#get_all_response_ids' do
+  #   it 'should return an array of response ids' do
+  #     VCR.use_cassette('qualtrics_response_ids') do
+  #       response_ids = api.get_all_response_ids
+  #       expect(response_ids).to eq('')
+  #     end
+  #   end
+  # end
+
 end
